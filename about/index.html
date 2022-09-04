@@ -11,8 +11,8 @@
   
   <title>
     
-      Tag 
-       : Nginx
+      关于我 
+      
       
       |
     
@@ -111,30 +111,55 @@
 
 
       <div class="flex-container">
-        <!-- 标签详情页，展示某个标签下的文章列表，url形式：https://yoursite/tags/某个标签/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<div class="container tag-details">
-  <div class="content-title">
-    <h2>
-      <span>Nginx</span>
-    </h2>
-  </div>
+
+  <!-- LaTex Display -->
+
   
-    <div class="post-list">
-      <div class="post-item" title="Nginx编译安装">
-        <span class="time-m-d">2022-03-20</span>
-        <a href="/2022/03/20/Nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/">
-          <span>Nginx编译安装</span>
-        </a>
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+  <!-- 关于页 url形式：https://yoursite/about/ -->
+    <div class="container about-index">
+      <div class="markdown-body">
+        
       </div>
     </div>
   
-  <nav class="post-navigation">
-    
-    <span class="page-num">1 / 1</span>
-    
-  </nav>
-</div>
+
+  
 
         
 <div class="footer">
@@ -396,6 +421,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%85%B3%E4%BA%8E%E6%88%91 + '&url=' + http%3A%2F%2Fexample.com%2Fabout%2Findex.html + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/about/index.html" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
