@@ -11,7 +11,7 @@
   
   <title>
     
-      archive_a: 2022 
+      vps一键DD 
       
       
       |
@@ -106,84 +106,190 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2022</span>
-          </h2>
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">vps一键DD</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2022-03-19 13:23:26
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/vps/" title="vps">
+                    #vps
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h4 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h4><p>​	腾讯云自带的一些组件，会阻止我们DD安装操作系统（安装过程会报错，无法正确写入进磁盘），所以在DD安装操作系统前，必须要禁用、删除掉这些组件.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop tat_agent</span><br><span class="line">systemctl disable tat_agent</span><br><span class="line">rm -rf /etc/systemd/system/tat_agent.service</span><br><span class="line">rm -fr /usr/local/qcloud </span><br><span class="line"> </span><br><span class="line">ps -A | grep agent</span><br><span class="line"># 检查看是否还有腾讯云组件</span><br><span class="line"># kill 这个进程</span><br></pre></td></tr></table></figure>
+
+<p>​	所有腾讯云组件都删除后，就可以DD安装Linux&#x2F;Windows了.	</p>
+<p>​	在使用 Centos 系统中使用 DD脚本，出现该错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Press any key to continue...Error! Not Found grub.</span><br></pre></td></tr></table></figure>
+
+<p>​	Centos下的 grub 是在 &#x2F;boot 下的 grub2 目录下 所以无法安装成功，重装切换到 Ubuntu 系统就不会出现该错误</p>
+<p>​	腾讯云请先切换 Ubuntu 的镜像源至中科大镜像源，使用默认镜像源会导致下载缓慢</p>
+<ul>
+<li><h3 id="安装脚本所需的组件"><a href="#安装脚本所需的组件" class="headerlink" title="安装脚本所需的组件"></a>安装脚本所需的组件</h3></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Debian/Ubuntu</span></span><br><span class="line"></span><br><span class="line"> apt-get install -y xz-utils openssl gawk file curl wget </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">RedHat/CentOS</span></span><br><span class="line"></span><br><span class="line">yum install -y xz openssl gawk file curl wget</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h3 id="使用CDN下载脚本"><a href="#使用CDN下载脚本" class="headerlink" title="使用CDN下载脚本"></a>使用CDN下载脚本</h3></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://cdn.jsdelivr.net/gh/hiCasper/Shell@master/AutoReinstall.sh &amp;&amp; chmod +x AutoReinstall.sh &amp;&amp; bash AutoReinstall.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="选择系统"><a href="#选择系统" class="headerlink" title="选择系统"></a>选择系统</h4></li>
+</ul>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/Snipaste_2022-03-19_15-41-16.jpg?raw=true" alt="Snipaste_2022-03-19_15-41-16.jpg"></p>
+<p>​	运行到这步，控制台会断开连接，之后需要到腾讯云使用VNC连接配置</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/Snipaste_2022-03-19_15-47-38.jpg?raw=true" alt="Snipaste_2022-03-19_15-47-38.jpg"></p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/Snipaste_2022-03-19_15-50-52.jpg?raw=true" alt="Snipaste_2022-03-19_15-50-52.jpg"></p>
+<p>​	一路 Continue就好</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/Snipaste_2022-03-19_15-53-03.jpg?raw=true" alt="Snipaste_2022-03-19_15-53-03.jpg"></p>
+<p>Centos </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">账号：root</span><br><span class="line">默认密码：Pwd@CentOS</span><br></pre></td></tr></table></figure>
+
+<p>其他Liunx系统</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">账号：root</span><br><span class="line">默认密码：Pwd@Linux</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<p>资料来源：</p>
+<p><a target="_blank" rel="noopener" href="https://www.2331314.xyz/295.html">https://www.2331314.xyz/295.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.xugo.xyz/index.php/2021/12/11/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%9B%BD%E5%86%85%E8%BD%BB%E9%87%8F-dd-%E7%B3%BB%E7%BB%9F/">https://www.xugo.xyz/index.php/2021/12/11/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%9B%BD%E5%86%85%E8%BD%BB%E9%87%8F-dd-%E7%B3%BB%E7%BB%9F/</a></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/12/11/myTest/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2022-03-19 13:23:26
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/vps/" title="vps">
+                        #vps
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2022/03/20/Nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
       
-      <div class="post-item" title="Hello World">
-        <div class="time-m-d">08-28</div>
-        <div class="title">
-          <a href="/2022/08/28/hello-world/">
-            <span>Hello World</span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-      <div class="post-item" title="MySql百题心得">
-        <div class="time-m-d">04-07</div>
-        <div class="title">
-          <a href="/2022/04/07/mysql%E7%99%BE%E9%A2%98%E5%BF%83%E5%BE%97/">
-            <span>MySql百题心得</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="docker从安装到使用的常用命令">
-        <div class="time-m-d">03-21</div>
-        <div class="title">
-          <a href="/2022/03/21/docker%E4%BB%8E%E5%AE%89%E8%A3%85%E5%88%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-            <span>docker从安装到使用的常用命令</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Nginx编译安装">
-        <div class="time-m-d">03-20</div>
-        <div class="title">
-          <a href="/2022/03/20/Nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/">
-            <span>Nginx编译安装</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="vps一键DD">
-        <div class="time-m-d">03-19</div>
-        <div class="title">
-          <a href="/2022/03/19/vps%E4%B8%80%E9%94%AEdd%E8%84%9A%E6%9C%AC/">
-            <span>vps一键DD</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2021</span>
-          </h2>
-        </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
       
-      <div class="post-item" title="myTest">
-        <div class="time-m-d">12-11</div>
-        <div class="title">
-          <a href="/2021/12/11/myTest/">
-            <span>myTest</span>
-          </a>
-        </div>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#tips"><span class="toc-text">tips:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E6%89%80%E9%9C%80%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="toc-text">安装脚本所需的组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8CDN%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC"><span class="toc-text">使用CDN下载脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E7%B3%BB%E7%BB%9F"><span class="toc-text">选择系统</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         
 <div class="footer">
@@ -438,6 +544,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + vps%E4%B8%80%E9%94%AEDD + '&url=' + http%3A%2F%2Fexample.com%2F2022%2F03%2F19%2Fvps%25E4%25B8%2580%25E9%2594%25AEdd%25E8%2584%259A%25E6%259C%25AC%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2022/03/19/vps%E4%B8%80%E9%94%AEdd%E8%84%9A%E6%9C%AC/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      MySql百题心得 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">MySql百题心得</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2022-04-07 14:33:06
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/MySql/" title="MySql">
+                    #MySql
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="知识点补充"><a href="#知识点补充" class="headerlink" title="知识点补充"></a>知识点补充</h2><center>SQL的思想</center>
+
+<center>面向集合的思想</center>
+
+<p>​	SQL是为查询和管理关系型数据库中的数据而专门设计的一种标准语言。我们通常认为的关系型是说的数据库中表与表的关系，这个理解是有问题的，这里的关系其实是数学术语上的关系。<br>为什么这么说？<br>​	<mark>因为关系型数据库是以关系模型为基础</mark>，而关系模型是以集合论和谓词逻辑两大数学理论为依据的。集合论中，关系是集合的一种表示。在关系模型中，<mark>关系是相关信息的一个集合</mark>，反映到数据库中就是一张表。<br>我们知道<mark>集合是不关心顺序的</mark>。表作为一个集合，<mark>它本身并没有顺序的概念</mark>。在很久之前有人问过，我按顺序插入id&#x3D;1,2,3的记录，为什么查处来时和插入的顺序不一致。很多人都有这样的认为，就是从表选取记录时，记录是按插入顺序或主键的大小顺序返回的。在SQL评审中也经常遇到不带ORDERBY 的LIMIT语句。<br>​	这么写实际上是有问题的，不带ORDER BY子句的查询只表示从集合中查询数据，返回的结果是不确定的，之所以结果看起来对的，是因为MySQL访问数据的方式和你的需求恰巧一致了，表上索引或数据的变化都可能会影响到你的结果。因此要牢记不要为表中的行假定任何特定的顺序，<mark>确定需要按某个顺序取数时显式的加上ORDER BY</mark>。<br>​	很多人都是先有面向过程和面向对象的对象的编程经验后开始SQL编程的，这往往限制了对SQL问题的思考。<br>​	SQL和传统编程语言最大的区别是它以关系模型和集合论为背景。在SQL编程中最能体现面向过程和面向集合区别的就是对游标的使用，面向过程的编程同样体现在使用中对子查询、派生表、以及临时表的过多依赖。许多人的编程经验是把一个任务细分成许多小任务，而后按一定的顺序来实现它们或先把需要的数据存储在各个临时表或先包含在派生表里再做关联处理。<mark>但如果按这种方式处理SQL编程，可能只会得到平庸的结果。</mark><br>​	这类实现往往是代码很长，很难维护，欠缺灵活性，而最大问题是由于相对固化的处理逻辑限制了优化器的优化空间，<mark>大多数情况下这类面向过程的实现在性能上都远不如面向集合的实现</mark>。编写高效的SQL需要我们跳出原有面向过程的思维方式，换一种思维方式去思考问题。<mark>可以总结为：解决SQL问题时要关注的是获取“什么”，而不是“如何”去获取</mark>。SQL是一门注重思想而非技巧的语言。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Alight/p/3649412.html">https://www.cnblogs.com/Alight/p/3649412.html</a></p>
+<center>SQL语句的执行顺序</center>
+有些情况下Select 语句没有加 “Order By”，返回的数据是不确定的
+这种问题碰到不止几次了。追根寻底， Select 语句如果不加 “Order By”， MySQL会怎么排序呢？
+
+<ul>
+<li>不能依赖 MySQL 的默认排序</li>
+<li>如果你想排序，总是加上 Order By</li>
+<li>GROUP BY 强加了 Order By （这与标准语法冲突，如果要避免，请使用 ORDER BY NULL）这里我有疑问，到底强加了何种 Order by<br>对于 MyISAM 表<br>MySQL Select 默认排序是按照物理存储顺序显示的。（不进行额外排序）.也就是说SELECT * FROM tabl – 会产生“表扫描”。如果表没有删除、替换、更新操作，记录会显示为插入的顺序。<br>对于 InnoDB 表<br>同样的情况，会按主键的顺序排列。再次强调，这只是潜规则（artifact of the underlying implementation：怎么翻译？），不靠谱的。<br>理解与推测<br>“Select” 不加 “Order by”时， MySQL 会尝试以尽可能快的方法（MySQL 实际的方法不见得快）返回数据。由于访问主键、索引大多数情况会快一些（在Cache里）所以返回的数据有可能以主键、索引的顺序输出，<br>这里并不会真的进行排序，主要是由于主键、索引本身就是排序放到内存的，所以连续输出时可能是某种序列。<br>在一些情况下消耗硬盘寻道时间最短的数据会先返回。如果只查询单个表，在特殊的情况下是有规律的。<br>最后总结：<br>“Order By 是要加的”<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/caomiao2006/article/details/52144949">https://blog.csdn.net/caomiao2006/article/details/52144949</a></li>
+</ul>
+<center>关于 ORDER BY关键字</center>
+##### 一、ORDER BY返回的是游标而不是集合
+
+<p>SQL的理论其实是集合论，常见的类似求数据的交集、并集、差集都可以使用集合的思维来求解。集合中的行之间没有预先定义的顺序，它只是成员的一种逻辑组合，成员之间的顺序无关紧要。如下图，每一个括号里的内容就是一条记录，在没排序前，他们都是随机分布在集合中。<br>Student(ID,Name,Age)</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407110418.png?raw=true" alt="20220407110418.png"></p>
+<center>Student集合</center>
+
+<p>但是对于带有排序作用的ORDER BY子句的查询，它返回的是一个对象，其中的行按特定的顺序组织在一起，我们把这种对象称为游标。<br>如下图，经过对Student表的ID进行ORDER BY排序后，Student表变成了有序对象，也就是我们上面说的游标。<br>Student(ID,Name,Age)</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111256.png?raw=true" alt="20220407111256.png"></p>
+<center>Student对象</center>
+
+
+
+<h5 id="二、ORDER-BY子句是唯一能重用列别名的一步"><a href="#二、ORDER-BY子句是唯一能重用列别名的一步" class="headerlink" title="二、ORDER BY子句是唯一能重用列别名的一步"></a>二、ORDER BY子句是唯一能重用列别名的一步</h5><p>这里涉及SQL语句的语法顺序和执行顺序了，我们常见的SQL语法顺序如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line"><span class="keyword">DISTINCT</span> </span><br><span class="line"><span class="operator">&lt;</span><span class="keyword">column</span><span class="operator">-</span>list<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line"><span class="operator">&lt;</span>left_table<span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span>join_type<span class="operator">&gt;</span> </span><br><span class="line"><span class="keyword">JOIN</span> </span><br><span class="line"><span class="operator">&lt;</span>right_table<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">ON</span> </span><br><span class="line"><span class="operator">&lt;</span>join_condition<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line"><span class="operator">&lt;</span>where_condition<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line"><span class="operator">&lt;</span>group_by_list<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">HAVING</span> </span><br><span class="line"><span class="operator">&lt;</span>having_condition<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> </span><br><span class="line"><span class="operator">&lt;</span>order_by_list<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>而数据库引擎在执行SQL语句并不是从SELECT开始执行，而是从FROM开始，具体执行顺序如下(关键字前面的数字代表SQL执行的顺序步骤)：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">8</span>)<span class="keyword">SELECT</span> (<span class="number">9</span>)<span class="keyword">DISTINCT</span>  (<span class="number">11</span>)<span class="operator">&lt;</span>Top Num<span class="operator">&gt;</span> <span class="operator">&lt;</span><span class="keyword">select</span> list<span class="operator">&gt;</span>  </span><br><span class="line">(<span class="number">1</span>)<span class="keyword">FROM</span> <span class="operator">&lt;</span>left_table<span class="operator">&gt;</span>  </span><br><span class="line">(<span class="number">3</span>)<span class="operator">&lt;</span>join_type<span class="operator">&gt;</span> <span class="keyword">JOIN</span> <span class="operator">&lt;</span>right_table<span class="operator">&gt;</span> </span><br><span class="line">(<span class="number">2</span>)<span class="keyword">ON</span>  <span class="operator">&lt;</span>join_condition<span class="operator">&gt;</span> </span><br><span class="line">(<span class="number">4</span>)<span class="keyword">WHERE</span> <span class="operator">&lt;</span>where_condition<span class="operator">&gt;</span> </span><br><span class="line">(<span class="number">5</span>)<span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="operator">&lt;</span>group_by_list<span class="operator">&gt;</span> </span><br><span class="line">(<span class="number">6</span>)<span class="keyword">WITH</span> <span class="operator">&lt;</span><span class="keyword">CUBE</span> <span class="operator">|</span> <span class="keyword">RollUP</span><span class="operator">&gt;</span> </span><br><span class="line">(<span class="number">7</span>)<span class="keyword">HAVING</span> <span class="operator">&lt;</span>having_condition<span class="operator">&gt;</span> </span><br><span class="line">(<span class="number">10</span>)<span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="operator">&lt;</span>order_by_list<span class="operator">&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看到SELECT在HAVING后才开始执行，这个时候SELECT后面列的别名只对后续的步骤生效，而对SELECT前面的步骤是无效的。所以如果你在WHERE，GROUP BY，或HAVING后面使用列的别名均会报错。<br>我们举例测试一下。</p>
+<p>示例表Customers结构及数据如下：</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111352.png?raw=true" alt="20220407111352.png"></p>
+<p>1、WHERE后面不使用别名的情况</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">WHERE</span> 城市<span class="operator">=</span><span class="string">&#x27;广州&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111448.png?raw=true" alt="20220407111448.png"></p>
+<p>2、WHERE后面使用列别名的情况</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">WHERE</span> City<span class="operator">=</span><span class="string">&#x27;广州&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下：</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111512.png?raw=true" alt="20220407111512.png"></p>
+<p>从返回的消息中我们可以看到，重命名后的City并不能被WHERE识别，所以才会报“列名’City’无效”的提示。<br>其他关键字大家也可以使用上述方法进行测试，下面我们测试GROUP BY和HAVING后面使用列别名的情况。<br>3、测试GROUP BY后使用列别名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> City</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111540.png?raw=true" alt="20220407111540.png"></p>
+<p>4、测试HAVING后使用列别名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> 城市 </span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(City) <span class="operator">&gt;</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>5、测试ORDER BY后面使用列别名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> City</span><br></pre></td></tr></table></figure>
+
+
+<p>结果如下：</p>
+<p> <img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111622.png?raw=true" alt="20220407111622.png"></p>
+<p>从上面的几个测试示例的结果中，可以得出我们的结论是正确的：ORDER BY子句是唯一能重用列别名的一步。</p>
+<h5 id="三、谨慎使用ORDER-BY-后面接数字的方式来进行排序"><a href="#三、谨慎使用ORDER-BY-后面接数字的方式来进行排序" class="headerlink" title="三、谨慎使用ORDER BY 后面接数字的方式来进行排序"></a>三、谨慎使用ORDER BY 后面接数字的方式来进行排序</h5><p>有些小伙伴为了图省事，喜欢在ORDER BY后面写数字，具体示例如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111701.png?raw=true" alt="20220407111701.png"></p>
+<p>这样写的结果，针对当前的查询是正确没有问题的，ORDER BY后面的数字1,2,3分别代表SELECT后面的第1，第2，第3个字段(也就是Name，Address，City)。<br>可是当查询的列发生改变，忘了修改ORDER BY列表。特别是当查询语句很长时，要找到ORDER BY与SELECT列表中的哪个列相对应会非常困难。<br>例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">客户ID <span class="keyword">AS</span> ID, </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>由于增加了一列“客户ID”，原本的题意还是对Name，Address，City排序，但是因为使用了ORDER BY加数字，排序后的结果如下：</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111731.png?raw=true" alt="20220407111731.png"></p>
+<p>得到的结果并不是我们想要的，所以请慎用ORDER BY加数字，尽量使用ORDER BY加列名或列别名。</p>
+<h5 id="四、表达式不能使用ORDER-BY排序"><a href="#四、表达式不能使用ORDER-BY排序" class="headerlink" title="四、表达式不能使用ORDER BY排序"></a>四、表达式不能使用ORDER BY排序</h5><p>表表达式包括视图，内联表值函数，派生表(子查询)和公用表表达式(CTE)。<br>例如下面的视图是无效的</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> V_Customers <span class="keyword">AS</span> </span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">客户ID <span class="keyword">AS</span> ID, </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> ID,Name,Address</span><br></pre></td></tr></table></figure>
+
+
+<p>结果如下：</p>
+<p> <img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111756.png?raw=true" alt="20220407111756.png"></p>
+<p>这个错误是不是很熟悉？因为很多小伙伴经常喜欢在视图或子查询里面加ORDER BY，然后一执行就会报这个错。<br>根本原因不敢妄加断定，因为搜寻了很多文献资料也没给出一个具体的说法。<br>这里猜测是因为视图，内联表值函数，派生表(子查询)和公用表表达式(CTE)等返回的结果还需要进一步的去使用，加了ORDER BY进行排序是多此一举，反而会浪费系统资源。所以数据库的开发者不希望大家使用这样不规范操作。<br>所以下次就不要在表表达式里添加ORDER BY了。</p>
+<h5 id="五、T-SQL中表表达式加了TOP可以使用ORDER-BY"><a href="#五、T-SQL中表表达式加了TOP可以使用ORDER-BY" class="headerlink" title="五、T-SQL中表表达式加了TOP可以使用ORDER BY"></a>五、T-SQL中表表达式加了TOP可以使用ORDER BY</h5><p>我们从第四点的报错信息中可以看到：在另外还指定了 TOP、OFFSET 或 FOR XML是可以使用ORDER BY的。</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111819.png?raw=true" alt="20220407111819.png"></p>
+<p>这又是为什么呢？<br>我们还是先举个栗子给大家看一下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">客户ID <span class="keyword">AS</span> ID, </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">(<span class="keyword">SELECT</span> TOP <span class="number">3</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> 城市) Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> ID,Name,Address</span><br></pre></td></tr></table></figure>
+
+<p>因为T-SQL中带有ORDER BY的表表达式加了TOP后返回的是一个没有固定顺序的表。因此，在这种情况下，ORDER BY子句只是为TOP选项定义逻辑顺序，就是下面这个逻辑子句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">3</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> 城市 </span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p> <img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111904.png?raw=true" alt="20220407111904.png"></p>
+<p>而不保证结果集的排列顺序，因为表表达式外面至少还有一层才是我们最终需要的结果集。<br>这里的ORDER BY只对当前的子查询生效，到了主查询是不起作用的。必须在主查询末尾继续添加一个ORDER BY子句才能对结果集生效，就像我们例子中写的那样。<br>除非逻辑要求，一般情况下并不推荐大家这样巧妙的避开子查询中不能使用ORDER BY的限制。</p>
+<p><a target="_blank" rel="noopener" href="https://database.51cto.com/art/201912/608333.htm">https://database.51cto.com/art/201912/608333.htm</a></p>
+<p>SQL常用关键字<br>	select * :<br>返回所有记录<br>	limit N :<br>返回 N 条记录<br>	offset M :<br>跳过 M 条记录, 默认 M&#x3D;0, 单独使用似乎不起作用<br>	limit N,M :<br>相当于 limit M offset N , 从第 N 条记录开始, 返回 M 条记录<br>	ORDER BY :<br>释：该关键字用于对结果集按照一列或者多个列进行排序<br>该关键字默认按照升序对记录进行排序。如果需要按照降序对记录进行排序，可以在SQL后添加DESC关键字<br>	SELECT DISTINCT :<br>在表中，一个列可能会包含多个重复值，有时也许希望仅仅列出不同（distinct）的值。<br>DISTINCT 关键词用于返回唯一不同的值。<br>使用该关键字必须指定<column-name> 并且必须要紧跟在SELECT关键字之后<br>例：<br><code>SELECT DISTINCT &lt;column_name&gt; FROM &lt;table_name&gt;</code><br>	SQL Aggregate函数 :<br>SQL Aggregate 函数计算从列中取得的值，返回一个单一的值。<br>有用的 Aggregate 函数：<br>•	AVG() - 返回平均值<br>•	COUNT() - 返回行数<br>•	FIRST() - 返回第一个记录的值<br>•	LAST() - 返回最后一个记录的值<br>•	MAX() - 返回最大值<br>•	MIN() - 返回最小值<br>•	SUM() - 返回总和</p>
+<p>	WHERE :<br>子句用于提取那些满足指定条件的记录。<br>例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">&lt;</span>column_name<span class="operator">&gt;</span>,<span class="operator">&lt;</span>column_name<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="operator">&lt;</span>table_name<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="operator">&lt;</span>column_name<span class="operator">&gt;</span> <span class="operator">&lt;</span>operator<span class="operator">&gt;</span> <span class="operator">&lt;</span><span class="keyword">value</span><span class="operator">&gt;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins">https://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins</a></p>
+<center>SQL百题(牛客)</center>
+
+
+
+<p><img src="https://www.runoob.com/wp-content/uploads/2019/01/sql-join.png" alt="img"></p>
+<p>SQL1 查找最晚入职员工</p>
+<p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/218ae58dfdcd4af195fff264e062138f">https://www.nowcoder.com/practice/218ae58dfdcd4af195fff264e062138f</a></p>
+<p>题解：<br>最晚入职的员工可能会有多人<br>我们使用集合的思想解题就是：查出整张表与整表的hire_date字段的最大值的交集<br>即:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> employees </span><br><span class="line"><span class="keyword">where</span> hire_date <span class="operator">=</span> (</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">max</span>(hire_date) <span class="keyword">from</span> employees</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>SQL2 查找入职员工时间排名倒数第三的员工所有信息</p>
+<p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/ec1ca44c62c14ceb990c3c40def1ec6c">https://www.nowcoder.com/practice/ec1ca44c62c14ceb990c3c40def1ec6c</a></p>
+<p>题解<br>查入职员工表，通过where过滤时间，所以还要使用子查询查出时间排名倒数第三的员工；但是时间倒数第三的员工可能不止一个，通过<code>DISTINCT</code>关键字过滤掉重复出现的时间。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> employees </span><br><span class="line"><span class="keyword">WHERE</span> hire_date <span class="operator">=</span> (</span><br><span class="line"><span class="keyword">SELECT</span> hire_date <span class="keyword">FROM</span> employees </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> hire_date <span class="keyword">ORDER</span> <span class="keyword">BY</span> hire_date <span class="keyword">DESC</span> limit <span class="number">2</span>,<span class="number">1</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> employees </span><br><span class="line"><span class="keyword">WHERE</span> hire_date <span class="operator">=</span> (</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> hire_date <span class="keyword">FROM</span> employees </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> hire_date <span class="keyword">DESC</span> limit <span class="number">2</span>,<span class="number">1</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+<p>SQL3 查找当前薪水详情以及部门编号dept_no</p>
+<p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/c63c5b54d86e4c6d880e4834bfd70c3b">https://www.nowcoder.com/practice/c63c5b54d86e4c6d880e4834bfd70c3b</a></p>
+<p>题解<br>入职时间相同的员工可能有多人</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/03/21/docker%E4%BB%8E%E5%AE%89%E8%A3%85%E5%88%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2022-04-07 14:33:06
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/MySql/" title="MySql">
+                        #MySql
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2022/08/28/hello-world/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85"><span class="toc-text">知识点补充</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8C%E3%80%81ORDER-BY%E5%AD%90%E5%8F%A5%E6%98%AF%E5%94%AF%E4%B8%80%E8%83%BD%E9%87%8D%E7%94%A8%E5%88%97%E5%88%AB%E5%90%8D%E7%9A%84%E4%B8%80%E6%AD%A5"><span class="toc-text">二、ORDER BY子句是唯一能重用列别名的一步</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%B0%A8%E6%85%8E%E4%BD%BF%E7%94%A8ORDER-BY-%E5%90%8E%E9%9D%A2%E6%8E%A5%E6%95%B0%E5%AD%97%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="toc-text">三、谨慎使用ORDER BY 后面接数字的方式来进行排序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8D%E8%83%BD%E4%BD%BF%E7%94%A8ORDER-BY%E6%8E%92%E5%BA%8F"><span class="toc-text">四、表达式不能使用ORDER BY排序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%94%E3%80%81T-SQL%E4%B8%AD%E8%A1%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8A%A0%E4%BA%86TOP%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8ORDER-BY"><span class="toc-text">五、T-SQL中表表达式加了TOP可以使用ORDER BY</span></a></li></ol></li></ol></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2022 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + MySql%E7%99%BE%E9%A2%98%E5%BF%83%E5%BE%97 + '&url=' + http%3A%2F%2Fexample.com%2F2022%2F04%2F07%2Fmysql%25E7%2599%25BE%25E9%25A2%2598%25E5%25BF%2583%25E5%25BE%2597%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2022/04/07/mysql%E7%99%BE%E9%A2%98%E5%BF%83%E5%BE%97/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"superSample":2,"hOffset":0,"vOffset":-20,"position":"left","width":200,"height":350},"mobile":{"show":false,"scale":0.5},"react":{"opacity":0.5},"log":false});</script></body>
+</html>

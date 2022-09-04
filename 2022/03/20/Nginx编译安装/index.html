@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      Nginx编译安装 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          <a href="/friends/">Friends</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Nginx编译安装</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2022-03-20 10:57:42
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/Nginx/" title="Nginx">
+                    #Nginx
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/vps/" title="vps">
+                    #vps
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="检查安装环境"><a href="#检查安装环境" class="headerlink" title="检查安装环境"></a>检查安装环境</h1><ul>
+<li><p>我们在安装不同的工具软件的时候，需要安装插件的环境关系</p>
+<p>​		检查系统版本：<code>cat /etc/redhat-release</code></p>
+<p>​		查看是否已安装<code>wget: rpm -qa|wget</code></p>
+<p>​		(注： Linux系统中的wget是一个下载文件的工具)</p>
+</li>
+<li><p>​	否则（结果显示空白）安装：<code>yum -y install wget</code></p>
+<p>​		安装g编译器：默认的云服务器都是会安装的。</p>
+<p>​		查看是否已安装编译器：<code>rpm -qa|gcc</code></p>
+<p>​		否则（结果显示空白）安装：<code>yum -y install gcc gcc-c++</code></p>
+</li>
+<li><p>为什么要装gcc编译器？</p>
+<p>​	gcc是c语言编译器<br>​	而我们的nginx的编码语言就是c语言</p>
+<p>​	使用gcc编译器可以编译语言代码为可执行程序</p>
+</li>
+</ul>
+<h1 id="安装-nginx依赖"><a href="#安装-nginx依赖" class="headerlink" title="安装 nginx依赖"></a>安装 nginx依赖</h1><ol>
+<li><p>nginx的Rewrite模块和HTTP核心模块会使用到PRE正则表达式语法</p>
+<p>yum -y install pcre pcre-devel</p>
+</li>
+<li><p>nginx的各种模块中需要使用gzip压缩：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install zlib zlib-devel</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>安全套接字层密码库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install openssl openssI-devel</span><br></pre></td></tr></table></figure>
+
+<h2 id="全部依赖："><a href="#全部依赖：" class="headerlink" title="全部依赖："></a>全部依赖：</h2></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc gcc-c++ make unzip pcre pcre-devel zlib zlib-devel libxml2 libxml2-devel  readline readline-devel ncurses ncurses-devel perl-devel perl-ExtUtils-Embed openssl-devel -y</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h1><ol>
+<li>下载 nginx</li>
+</ol>
+<p>​	wget <a target="_blank" rel="noopener" href="http://nginx.org/download/nginx-1.14.0.tar.gz">http://nginx.org/download/nginx-1.14.0.tar.gz</a> 或者下载好直接上传</p>
+<p>​	解压：<code>tar-zxvf nginx-1.14.0.tar.gz</code></p>
+<ol start="2">
+<li>解压nginx</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd nginx-1.14.0</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220320122137.png?raw=true" alt="20220320122137.png"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/src/nginx --with-http_ssl_module --with-http_stub_status_module --with-pcre --with-http_spdy_module</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">参数说明：</span><br><span class="line">编译选项官方提供的有：</span><br><span class="line">–prefix=path 定义一个目录来保存你的nginx的提供功能的文件夹，就这好比我们安装软件的时候软件存放的目录，如果我们在编译的不指定安装位置，那么默认的位置/usr/local/nginx 目录</span><br><span class="line">–sbin-path=path 设置nginx执行脚本的位置，这里如果设置在path变量里面，就可以在bash环境下，任意使用nginx命令，默认位置prefix/sbin/nginx 注意这里的prefix是</span><br><span class="line">在配置文件里面配置的路径</span><br><span class="line">–conf-path=path 配置nginx配置文件的路径，如果不指定这个选项，那么配置文件的默认路径就会是 prefix/conf/nginx.conf</span><br><span class="line">–pid-path =path 配置nginx.pid file的路径，一般来说，进程在运行的时候的时候有一个进程id，这个id会保存在pid file里面，默认的pid file的放置位置是prefix/logs/nginx.pid</span><br><span class="line">–error-log-path=path 设置错误日志的存放路径，如果不指定，就默认 prefix/logs/error.log</span><br><span class="line">–http-log-path= path 设置http访问日志的路径，如果不指定，就默认 prefix/logs/access.log</span><br><span class="line">–user=name 设置默认启动进程的用户，如果不指定，就默认 nobody</span><br><span class="line">–group=name 设置这个用户所在的用户组，如果不指定，依然是nobody</span><br><span class="line">这些是我们常用的编译选项，其他的可以均保持默认，如需特殊指定，可上nginx官网查阅 http://nginx.org/en/docs/configure.html</span><br><span class="line">下面是一些不常用的选项</span><br><span class="line">–with-http_ssl_module -开启HTTP SSL模块，使NGINX可以支持HTTPS请求。需要安装了OPENSSL</span><br><span class="line">–with-http_flv_module</span><br><span class="line">–with-http_stub_status_module - 启用 “server status” 页(可有可无)</span><br><span class="line">–without-http_gzip_module - 禁用 ngx_http_gzip_module. 如果启用，需要 zlib 。</span><br><span class="line">–without-http_ssi_module - 禁用 ngx_http_ssi_module</span><br><span class="line">–without-http_referer_module - 禁用 ngx_http_referer_module</span><br><span class="line">–without-http_rewrite_module - 禁用 ngx_http_rewrite_module. 如果启用需要 PCRE 。</span><br><span class="line">–without-http_proxy_module - 禁用 ngx_http_proxy_module</span><br><span class="line">–without-http_fastcgi_module - 禁用 ngx_http_fastcgi_module</span><br><span class="line">–without-http_memcached_module - 禁用 ngx_http_memcached_module</span><br><span class="line">–without-http_browser_module - 禁用 ngx_http_browser_module</span><br><span class="line">–http-proxy-temp-path=PATH - Set path to the http proxy temporary files</span><br><span class="line">–http-fastcgi-temp-path=PATH - Set path to the http fastcgi temporary files</span><br><span class="line">–without-http - 禁用 HTTP server（用作代理或反向代理）</span><br><span class="line">–with-mail - 启用 IMAP4/POP3/SMTP 代理模块</span><br><span class="line">–with-mail_ssl_module - 启用 ngx_mail_ssl_module</span><br><span class="line">–with-openssl=DIR - Set path to OpenSSL library sources</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>编译并安装</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>创建并设置 nginx运行账号（本章节是为了提高服务器的访问权限控制——可跳过，不影响个人使用）</p>
+<p>group add nginx</p>
+<p>user add -M -g nginx -s &#x2F;sbin&#x2F;nologin nginx（手动创建一个用户，不想让用户登录系统）</p>
+<p>cd &#x2F;usr&#x2F;local&#x2F;src&#x2F;nginx&#x2F;config</p>
+<p>(注: M：不要自动建立用户的登入目录。)</p>
+<p>s是指定用户登入后所使用的she11。默认值为&#x2F;bin&#x2F;bash。如果不想让用户登录系统可以用-s &#x2F;sbin&#x2F;nologin此用户就不可以登录系统</p>
+</li>
+<li><p>设置 nginx为系统服务</p>
+<p>   在文件夹&#x2F;lib&#x2F;systemd&#x2F;system新建文件 nginx.service</p>
+<p>   文件创建：touch nginx.service</p>
+<p>   vim &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;nginx.service</p>
+<p>写入：</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx</span><br><span class="line">After=network.target</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/local/src/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/src/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/src/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li><p>启动nginx</p>
+<p>systemctl start nginx</p>
+<p>如果出现</p>
+<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220320124604.png?raw=true" alt="20220320124604.png"></p>
+<p>那么输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line"></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<p>再重新启动nginx即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></table></figure>
+
+<h1 id="nginx的config文件语法高亮"><a href="#nginx的config文件语法高亮" class="headerlink" title="nginx的config文件语法高亮"></a>nginx的config文件语法高亮</h1><ol>
+<li>进入nginx的源码文件</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/nginx-1.18.0/contrib/vim/syntax</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>将该文件夹下的nginx.vim复制到<del>&#x2F;.vim&#x2F;syntax&#x2F;文件夹下，并且在</del>&#x2F;.vim&#x2F;filetype.vim文件中</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;au BufRead,BufNewFile /usr/local/src/nginx/conf/* set ft=nginx&quot; &gt;&gt; /root/.vim/filetype.vim</span><br></pre></td></tr></table></figure>
+
+<h1 id="额外内容"><a href="#额外内容" class="headerlink" title="额外内容"></a>额外内容</h1><p><a target="_blank" rel="noopener" href="https://xinx.top/archives/45.html">https://xinx.top/archives/45.html</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install kernel-headers</span><br></pre></td></tr></table></figure>
+
+<p>Nginx官网 启动脚本</p>
+<p><a target="_blank" rel="noopener" href="https://www.nginx.com/resources/wiki/start/topics/examples/redhatnginxinit/">https://www.nginx.com/resources/wiki/start/topics/examples/redhatnginxinit/</a></p>
+</li>
+</ol>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/03/19/vps%E4%B8%80%E9%94%AEdd%E8%84%9A%E6%9C%AC/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2022-03-20 10:57:42
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/Nginx/" title="Nginx">
+                        #Nginx
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/vps/" title="vps">
+                        #vps
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2022/03/21/docker%E4%BB%8E%E5%AE%89%E8%A3%85%E5%88%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="toc-text">检查安装环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-nginx%E4%BE%9D%E8%B5%96"><span class="toc-text">安装 nginx依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E9%83%A8%E4%BE%9D%E8%B5%96%EF%BC%9A"><span class="toc-text">全部依赖：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85nginx"><span class="toc-text">安装nginx</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx%E7%9A%84config%E6%96%87%E4%BB%B6%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE"><span class="toc-text">nginx的config文件语法高亮</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%9D%E5%A4%96%E5%86%85%E5%AE%B9"><span class="toc-text">额外内容</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2022 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85 + '&url=' + http%3A%2F%2Fexample.com%2F2022%2F03%2F20%2FNginx%25E7%25BC%2596%25E8%25AF%2591%25E5%25AE%2589%25E8%25A3%2585%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2022/03/20/Nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"superSample":2,"hOffset":0,"vOffset":-20,"position":"left","width":200,"height":350},"mobile":{"show":false,"scale":0.5},"react":{"opacity":0.5},"log":false});</script></body>
+</html>

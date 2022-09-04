@@ -11,7 +11,7 @@
   
   <title>
     
-      archive_a: 2022 
+      docker从安装到使用的常用命令 
       
       
       |
@@ -106,84 +106,155 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2022</span>
-          </h2>
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">docker从安装到使用的常用命令</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2022-03-21 14:33:06
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/Docker/" title="Docker">
+                    #Docker
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>清理Centos自带Docker版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
+
+<p>安装Docker所需依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
+
+<p>安装Docker-ce源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<p>更新缓存Yum缓存</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
+
+<p>下载Docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce</span><br></pre></td></tr></table></figure>
+
+<p>查看Docker版本并启动Docker服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">systemctl status docker</span><br><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<p>查看Docker镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br><span class="line">docker images -qa</span><br><span class="line">docker images --digests</span><br></pre></td></tr></table></figure>
+
+<p>设置Docker镜像源加速 (中科大镜像源)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/docker</span><br><span class="line">tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>查看Docker的GitHub列表目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker search [想查看的Docker应用]</span><br><span class="line">例：</span><br><span class="line">	[root@server ~]# docker search python</span><br><span class="line">  NAME                                     DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">  python                                   Python is an interpreted, interactive, objec…   7701      [OK]       </span><br><span class="line">  pypy                                     PyPy is a fast, compliant alternative implem…   330       [OK]       </span><br><span class="line">  circleci/python                          Python is an interpreted, interactive, objec…   51                   </span><br><span class="line">  hylang                                   Hy is a Lisp dialect that translates express…   45        [OK]       </span><br><span class="line">  bitnami/python                           Bitnami Python Docker Image                     22                   [OK]</span><br><span class="line">  cimg/python                                                                              5                    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/03/20/Nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2022-03-21 14:33:06
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/Docker/" title="Docker">
+                        #Docker
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2022/04/07/mysql%E7%99%BE%E9%A2%98%E5%BF%83%E5%BE%97/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
       
-      <div class="post-item" title="Hello World">
-        <div class="time-m-d">08-28</div>
-        <div class="title">
-          <a href="/2022/08/28/hello-world/">
-            <span>Hello World</span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-      <div class="post-item" title="MySql百题心得">
-        <div class="time-m-d">04-07</div>
-        <div class="title">
-          <a href="/2022/04/07/mysql%E7%99%BE%E9%A2%98%E5%BF%83%E5%BE%97/">
-            <span>MySql百题心得</span>
-          </a>
-        </div>
-      </div>
+
     
-      <div class="post-item" title="docker从安装到使用的常用命令">
-        <div class="time-m-d">03-21</div>
-        <div class="title">
-          <a href="/2022/03/21/docker%E4%BB%8E%E5%AE%89%E8%A3%85%E5%88%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-            <span>docker从安装到使用的常用命令</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Nginx编译安装">
-        <div class="time-m-d">03-20</div>
-        <div class="title">
-          <a href="/2022/03/20/Nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/">
-            <span>Nginx编译安装</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="vps一键DD">
-        <div class="time-m-d">03-19</div>
-        <div class="title">
-          <a href="/2022/03/19/vps%E4%B8%80%E9%94%AEdd%E8%84%9A%E6%9C%AC/">
-            <span>vps一键DD</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2021</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="myTest">
-        <div class="time-m-d">12-11</div>
-        <div class="title">
-          <a href="/2021/12/11/myTest/">
-            <span>myTest</span>
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         
 <div class="footer">
@@ -438,6 +509,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + docker%E4%BB%8E%E5%AE%89%E8%A3%85%E5%88%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4 + '&url=' + http%3A%2F%2Fexample.com%2F2022%2F03%2F21%2Fdocker%25E4%25BB%258E%25E5%25AE%2589%25E8%25A3%2585%25E5%2588%25B0%25E4%25BD%25BF%25E7%2594%25A8%25E7%259A%2584%25E5%25B8%25B8%25E7%2594%25A8%25E5%2591%25BD%25E4%25BB%25A4%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2022/03/21/docker%E4%BB%8E%E5%AE%89%E8%A3%85%E5%88%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
