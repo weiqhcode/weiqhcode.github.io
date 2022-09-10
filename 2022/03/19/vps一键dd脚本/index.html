@@ -196,20 +196,11 @@
 
 <p>​	Centos下的 grub 是在 &#x2F;boot 下的 grub2 目录下 所以无法安装成功，重装切换到 Ubuntu 系统就不会出现该错误</p>
 <p>​	腾讯云请先切换 Ubuntu 的镜像源至中科大镜像源，使用默认镜像源会导致下载缓慢</p>
-<ul>
-<li><h3 id="安装脚本所需的组件"><a href="#安装脚本所需的组件" class="headerlink" title="安装脚本所需的组件"></a>安装脚本所需的组件</h3></li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Debian/Ubuntu</span></span><br><span class="line"></span><br><span class="line"> apt-get install -y xz-utils openssl gawk file curl wget </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">RedHat/CentOS</span></span><br><span class="line"></span><br><span class="line">yum install -y xz openssl gawk file curl wget</span><br></pre></td></tr></table></figure>
+<h3 id="安装脚本所需的组件"><a href="#安装脚本所需的组件" class="headerlink" title="-  安装脚本所需的组件"></a>-  安装脚本所需的组件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Debian/Ubuntu</span></span><br><span class="line"></span><br><span class="line"> apt-get install -y xz-utils openssl gawk file curl wget </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">RedHat/CentOS</span></span><br><span class="line"></span><br><span class="line">yum install -y xz openssl gawk file curl wget</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><h3 id="使用CDN下载脚本"><a href="#使用CDN下载脚本" class="headerlink" title="使用CDN下载脚本"></a>使用CDN下载脚本</h3></li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://cdn.jsdelivr.net/gh/hiCasper/Shell@master/AutoReinstall.sh &amp;&amp; chmod +x AutoReinstall.sh &amp;&amp; bash AutoReinstall.sh</span><br></pre></td></tr></table></figure>
+<h3 id="使用CDN下载脚本"><a href="#使用CDN下载脚本" class="headerlink" title="- 使用CDN下载脚本"></a>- 使用CDN下载脚本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://cdn.jsdelivr.net/gh/hiCasper/Shell@master/AutoReinstall.sh &amp;&amp; chmod +x AutoReinstall.sh &amp;&amp; bash AutoReinstall.sh</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><h4 id="选择系统"><a href="#选择系统" class="headerlink" title="选择系统"></a>选择系统</h4></li>
-</ul>
-<p><img src="https://github.com/weiqh2000/blogImages/blob/main/Snipaste_2022-03-19_15-41-16.jpg?raw=true" alt="Snipaste_2022-03-19_15-41-16.jpg"></p>
+<h4 id="选择系统"><a href="#选择系统" class="headerlink" title="- 选择系统"></a>- 选择系统</h4><p><img src="https://github.com/weiqh2000/blogImages/blob/main/Snipaste_2022-03-19_15-41-16.jpg?raw=true" alt="Snipaste_2022-03-19_15-41-16.jpg"></p>
 <p>​	运行到这步，控制台会断开连接，之后需要到腾讯云使用VNC连接配置</p>
 <p><img src="https://github.com/weiqh2000/blogImages/blob/main/Snipaste_2022-03-19_15-47-38.jpg?raw=true" alt="Snipaste_2022-03-19_15-47-38.jpg"></p>
 <p><img src="https://github.com/weiqh2000/blogImages/blob/main/Snipaste_2022-03-19_15-50-52.jpg?raw=true" alt="Snipaste_2022-03-19_15-50-52.jpg"></p>
@@ -292,7 +283,7 @@
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#tips"><span class="toc-text">tips:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E6%89%80%E9%9C%80%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="toc-text">安装脚本所需的组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8CDN%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC"><span class="toc-text">使用CDN下载脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E7%B3%BB%E7%BB%9F"><span class="toc-text">选择系统</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#tips"><span class="toc-text">tips:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E6%89%80%E9%9C%80%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="toc-text">-  安装脚本所需的组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8CDN%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC"><span class="toc-text">- 使用CDN下载脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E7%B3%BB%E7%BB%9F"><span class="toc-text">- 选择系统</span></a></li></ol>
       
     </div>
   </div>

@@ -215,87 +215,57 @@
 <p>​	使用gcc编译器可以编译语言代码为可执行程序</p>
 </li>
 </ul>
-<h1 id="安装-nginx依赖"><a href="#安装-nginx依赖" class="headerlink" title="安装 nginx依赖"></a>安装 nginx依赖</h1><ol>
-<li><p>nginx的Rewrite模块和HTTP核心模块会使用到PRE正则表达式语法</p>
-<p>yum -y install pcre pcre-devel</p>
-</li>
-<li><p>nginx的各种模块中需要使用gzip压缩：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install zlib zlib-devel</span><br></pre></td></tr></table></figure>
+<h1 id="安装-nginx依赖"><a href="#安装-nginx依赖" class="headerlink" title="安装 nginx依赖"></a>安装 nginx依赖</h1><h2 id="1-nginx的Rewrite模块和HTTP核心模块会使用到PRE正则表达式语法"><a href="#1-nginx的Rewrite模块和HTTP核心模块会使用到PRE正则表达式语法" class="headerlink" title="1. nginx的Rewrite模块和HTTP核心模块会使用到PRE正则表达式语法"></a>1. nginx的Rewrite模块和HTTP核心模块会使用到PRE正则表达式语法</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install pcre pcre-devel</span><br></pre></td></tr></table></figure>
 
+<h2 id="2-nginx的各种模块中需要使用gzip压缩："><a href="#2-nginx的各种模块中需要使用gzip压缩：" class="headerlink" title="2. nginx的各种模块中需要使用gzip压缩："></a>2. nginx的各种模块中需要使用gzip压缩：</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install zlib zlib-devel</span><br></pre></td></tr></table></figure>
 
-</li>
-<li><p>安全套接字层密码库</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install openssl openssI-devel</span><br></pre></td></tr></table></figure>
+<h2 id="3-安全套接字层密码库"><a href="#3-安全套接字层密码库" class="headerlink" title="3. 安全套接字层密码库"></a>3. 安全套接字层密码库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install openssl openssI-devel</span><br></pre></td></tr></table></figure>
 
-<h2 id="全部依赖："><a href="#全部依赖：" class="headerlink" title="全部依赖："></a>全部依赖：</h2></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc gcc-c++ make unzip pcre pcre-devel zlib zlib-devel libxml2 libxml2-devel  readline readline-devel ncurses ncurses-devel perl-devel perl-ExtUtils-Embed openssl-devel -y</span><br></pre></td></tr></table></figure>
+<h2 id="4-全部依赖："><a href="#4-全部依赖：" class="headerlink" title="4. 全部依赖："></a>4. 全部依赖：</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc gcc-c++ make unzip pcre pcre-devel zlib zlib-devel libxml2 libxml2-devel  readline readline-devel ncurses ncurses-devel perl-devel perl-ExtUtils-Embed openssl-devel -y</span><br></pre></td></tr></table></figure>
 
-<h1 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h1><ol>
-<li>下载 nginx</li>
-</ol>
-<p>​	wget <a target="_blank" rel="noopener" href="http://nginx.org/download/nginx-1.14.0.tar.gz">http://nginx.org/download/nginx-1.14.0.tar.gz</a> 或者下载好直接上传</p>
+<h1 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h1><h2 id="1-下载-nginx"><a href="#1-下载-nginx" class="headerlink" title="1. 下载 nginx"></a>1. 下载 nginx</h2><p>​	wget <a target="_blank" rel="noopener" href="http://nginx.org/download/nginx-1.14.0.tar.gz">http://nginx.org/download/nginx-1.14.0.tar.gz</a> 或者下载好直接上传</p>
 <p>​	解压：<code>tar-zxvf nginx-1.14.0.tar.gz</code></p>
-<ol start="2">
-<li>解压nginx</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd nginx-1.14.0</span><br></pre></td></tr></table></figure>
+<h2 id="2-解压nginx"><a href="#2-解压nginx" class="headerlink" title="2. 解压nginx"></a>2. 解压nginx</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd nginx-1.14.0</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220320122137.png?raw=true" alt="20220320122137.png"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/src/nginx --with-http_ssl_module --with-http_stub_status_module --with-pcre --with-http_spdy_module</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">参数说明：</span><br><span class="line">编译选项官方提供的有：</span><br><span class="line">–prefix=path 定义一个目录来保存你的nginx的提供功能的文件夹，就这好比我们安装软件的时候软件存放的目录，如果我们在编译的不指定安装位置，那么默认的位置/usr/local/nginx 目录</span><br><span class="line">–sbin-path=path 设置nginx执行脚本的位置，这里如果设置在path变量里面，就可以在bash环境下，任意使用nginx命令，默认位置prefix/sbin/nginx 注意这里的prefix是</span><br><span class="line">在配置文件里面配置的路径</span><br><span class="line">–conf-path=path 配置nginx配置文件的路径，如果不指定这个选项，那么配置文件的默认路径就会是 prefix/conf/nginx.conf</span><br><span class="line">–pid-path =path 配置nginx.pid file的路径，一般来说，进程在运行的时候的时候有一个进程id，这个id会保存在pid file里面，默认的pid file的放置位置是prefix/logs/nginx.pid</span><br><span class="line">–error-log-path=path 设置错误日志的存放路径，如果不指定，就默认 prefix/logs/error.log</span><br><span class="line">–http-log-path= path 设置http访问日志的路径，如果不指定，就默认 prefix/logs/access.log</span><br><span class="line">–user=name 设置默认启动进程的用户，如果不指定，就默认 nobody</span><br><span class="line">–group=name 设置这个用户所在的用户组，如果不指定，依然是nobody</span><br><span class="line">这些是我们常用的编译选项，其他的可以均保持默认，如需特殊指定，可上nginx官网查阅 http://nginx.org/en/docs/configure.html</span><br><span class="line">下面是一些不常用的选项</span><br><span class="line">–with-http_ssl_module -开启HTTP SSL模块，使NGINX可以支持HTTPS请求。需要安装了OPENSSL</span><br><span class="line">–with-http_flv_module</span><br><span class="line">–with-http_stub_status_module - 启用 “server status” 页(可有可无)</span><br><span class="line">–without-http_gzip_module - 禁用 ngx_http_gzip_module. 如果启用，需要 zlib 。</span><br><span class="line">–without-http_ssi_module - 禁用 ngx_http_ssi_module</span><br><span class="line">–without-http_referer_module - 禁用 ngx_http_referer_module</span><br><span class="line">–without-http_rewrite_module - 禁用 ngx_http_rewrite_module. 如果启用需要 PCRE 。</span><br><span class="line">–without-http_proxy_module - 禁用 ngx_http_proxy_module</span><br><span class="line">–without-http_fastcgi_module - 禁用 ngx_http_fastcgi_module</span><br><span class="line">–without-http_memcached_module - 禁用 ngx_http_memcached_module</span><br><span class="line">–without-http_browser_module - 禁用 ngx_http_browser_module</span><br><span class="line">–http-proxy-temp-path=PATH - Set path to the http proxy temporary files</span><br><span class="line">–http-fastcgi-temp-path=PATH - Set path to the http fastcgi temporary files</span><br><span class="line">–without-http - 禁用 HTTP server（用作代理或反向代理）</span><br><span class="line">–with-mail - 启用 IMAP4/POP3/SMTP 代理模块</span><br><span class="line">–with-mail_ssl_module - 启用 ngx_mail_ssl_module</span><br><span class="line">–with-openssl=DIR - Set path to OpenSSL library sources</span><br></pre></td></tr></table></figure>
 
-<ol start="3">
-<li>编译并安装</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h2 id="3-编译并安装"><a href="#3-编译并安装" class="headerlink" title="3. 编译并安装"></a>3. 编译并安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 
-<ol start="4">
-<li><p>创建并设置 nginx运行账号（本章节是为了提高服务器的访问权限控制——可跳过，不影响个人使用）</p>
-<p>group add nginx</p>
-<p>user add -M -g nginx -s &#x2F;sbin&#x2F;nologin nginx（手动创建一个用户，不想让用户登录系统）</p>
-<p>cd &#x2F;usr&#x2F;local&#x2F;src&#x2F;nginx&#x2F;config</p>
-<p>(注: M：不要自动建立用户的登入目录。)</p>
-<p>s是指定用户登入后所使用的she11。默认值为&#x2F;bin&#x2F;bash。如果不想让用户登录系统可以用-s &#x2F;sbin&#x2F;nologin此用户就不可以登录系统</p>
-</li>
-<li><p>设置 nginx为系统服务</p>
-<p>   在文件夹&#x2F;lib&#x2F;systemd&#x2F;system新建文件 nginx.service</p>
-<p>   文件创建：touch nginx.service</p>
-<p>   vim &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;nginx.service</p>
-<p>写入：</p>
-</li>
-</ol>
+<h2 id="4-创建并设置-nginx运行账号（本章节是为了提高服务器的访问权限控制——可跳过，不影响个人使用）"><a href="#4-创建并设置-nginx运行账号（本章节是为了提高服务器的访问权限控制——可跳过，不影响个人使用）" class="headerlink" title="4. 创建并设置 nginx运行账号（本章节是为了提高服务器的访问权限控制——可跳过，不影响个人使用）"></a>4. 创建并设置 nginx运行账号（本章节是为了提高服务器的访问权限控制——可跳过，不影响个人使用）</h2><p>   group add nginx</p>
+<p>   user add -M -g nginx -s &#x2F;sbin&#x2F;nologin nginx（手动创建一个用户，不想让用户登录系统）</p>
+<p>   cd &#x2F;usr&#x2F;local&#x2F;src&#x2F;nginx&#x2F;config</p>
+<p>   (注: M：不要自动建立用户的登入目录。)</p>
+<p>   s是指定用户登入后所使用的she11。默认值为&#x2F;bin&#x2F;bash。如果不想让用户登录系统可以用-s &#x2F;sbin&#x2F;nologin此用户就不可以登录系统</p>
+<h2 id="5-设置-nginx为系统服务"><a href="#5-设置-nginx为系统服务" class="headerlink" title="5. 设置 nginx为系统服务"></a>5. 设置 nginx为系统服务</h2><pre><code>  在文件夹/lib/systemd/system新建文件 nginx.service
+
+  文件创建：touch nginx.service
+
+  vim /lib/systemd/system/nginx.service
+</code></pre>
+<p>   写入：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx</span><br><span class="line">After=network.target</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/local/src/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/src/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/src/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
 
-<ol start="6">
-<li><p>启动nginx</p>
-<p>systemctl start nginx</p>
-<p>如果出现</p>
-<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220320124604.png?raw=true" alt="20220320124604.png"></p>
-<p>那么输入</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line"></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<h2 id="6-启动nginx"><a href="#6-启动nginx" class="headerlink" title="6. 启动nginx"></a>6. 启动nginx</h2><p>   systemctl start nginx</p>
+<p>   如果出现</p>
+<p>   <img src="https://github.com/weiqh2000/blogImages/blob/main/20220320124604.png?raw=true" alt="20220320124604.png"></p>
+<p>   那么输入</p>
+   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line"></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
 
-<p>再重新启动nginx即可</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></table></figure>
+<p>   再重新启动nginx即可</p>
+   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></table></figure>
 
-<h1 id="nginx的config文件语法高亮"><a href="#nginx的config文件语法高亮" class="headerlink" title="nginx的config文件语法高亮"></a>nginx的config文件语法高亮</h1><ol>
-<li>进入nginx的源码文件</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/nginx-1.18.0/contrib/vim/syntax</span><br></pre></td></tr></table></figure>
+<h1 id="nginx的config文件语法高亮"><a href="#nginx的config文件语法高亮" class="headerlink" title="nginx的config文件语法高亮"></a>nginx的config文件语法高亮</h1><h2 id="1-进入nginx的源码文件"><a href="#1-进入nginx的源码文件" class="headerlink" title="1. 进入nginx的源码文件"></a>1. 进入nginx的源码文件</h2>   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/nginx-1.18.0/contrib/vim/syntax</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>将该文件夹下的nginx.vim复制到<del>&#x2F;.vim&#x2F;syntax&#x2F;文件夹下，并且在</del>&#x2F;.vim&#x2F;filetype.vim文件中</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;au BufRead,BufNewFile /usr/local/src/nginx/conf/* set ft=nginx&quot; &gt;&gt; /root/.vim/filetype.vim</span><br></pre></td></tr></table></figure>
+<h2 id="2-将该文件夹下的nginx-vim复制到-x2F-vim-x2F-syntax-x2F-文件夹下，并且在-x2F-vim-x2F-filetype-vim文件中"><a href="#2-将该文件夹下的nginx-vim复制到-x2F-vim-x2F-syntax-x2F-文件夹下，并且在-x2F-vim-x2F-filetype-vim文件中" class="headerlink" title="2. 将该文件夹下的nginx.vim复制到&#x2F;.vim&#x2F;syntax&#x2F;文件夹下，并且在&#x2F;.vim&#x2F;filetype.vim文件中"></a>2. 将该文件夹下的nginx.vim复制到<del>&#x2F;.vim&#x2F;syntax&#x2F;文件夹下，并且在</del>&#x2F;.vim&#x2F;filetype.vim文件中</h2>   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;au BufRead,BufNewFile /usr/local/src/nginx/conf/* set ft=nginx&quot; &gt;&gt; /root/.vim/filetype.vim</span><br></pre></td></tr></table></figure>
 
-<h1 id="额外内容"><a href="#额外内容" class="headerlink" title="额外内容"></a>额外内容</h1><p><a target="_blank" rel="noopener" href="https://xinx.top/archives/45.html">https://xinx.top/archives/45.html</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install kernel-headers</span><br></pre></td></tr></table></figure>
+<h1 id="额外内容"><a href="#额外内容" class="headerlink" title="额外内容"></a>额外内容</h1><p>   <a target="_blank" rel="noopener" href="https://xinx.top/archives/45.html">https://xinx.top/archives/45.html</a></p>
+   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install kernel-headers</span><br></pre></td></tr></table></figure>
 
-<p>Nginx官网 启动脚本</p>
-<p><a target="_blank" rel="noopener" href="https://www.nginx.com/resources/wiki/start/topics/examples/redhatnginxinit/">https://www.nginx.com/resources/wiki/start/topics/examples/redhatnginxinit/</a></p>
-</li>
-</ol>
+<p>   Nginx官网 启动脚本</p>
+<p>   <a target="_blank" rel="noopener" href="https://www.nginx.com/resources/wiki/start/topics/examples/redhatnginxinit/">https://www.nginx.com/resources/wiki/start/topics/examples/redhatnginxinit/</a></p>
 
       </div>
       
@@ -368,7 +338,7 @@
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="toc-text">检查安装环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-nginx%E4%BE%9D%E8%B5%96"><span class="toc-text">安装 nginx依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E9%83%A8%E4%BE%9D%E8%B5%96%EF%BC%9A"><span class="toc-text">全部依赖：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85nginx"><span class="toc-text">安装nginx</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx%E7%9A%84config%E6%96%87%E4%BB%B6%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE"><span class="toc-text">nginx的config文件语法高亮</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%9D%E5%A4%96%E5%86%85%E5%AE%B9"><span class="toc-text">额外内容</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="toc-text">检查安装环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-nginx%E4%BE%9D%E8%B5%96"><span class="toc-text">安装 nginx依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-nginx%E7%9A%84Rewrite%E6%A8%A1%E5%9D%97%E5%92%8CHTTP%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97%E4%BC%9A%E4%BD%BF%E7%94%A8%E5%88%B0PRE%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E6%B3%95"><span class="toc-text">1. nginx的Rewrite模块和HTTP核心模块会使用到PRE正则表达式语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-nginx%E7%9A%84%E5%90%84%E7%A7%8D%E6%A8%A1%E5%9D%97%E4%B8%AD%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8gzip%E5%8E%8B%E7%BC%A9%EF%BC%9A"><span class="toc-text">2. nginx的各种模块中需要使用gzip压缩：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%89%E5%85%A8%E5%A5%97%E6%8E%A5%E5%AD%97%E5%B1%82%E5%AF%86%E7%A0%81%E5%BA%93"><span class="toc-text">3. 安全套接字层密码库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%85%A8%E9%83%A8%E4%BE%9D%E8%B5%96%EF%BC%9A"><span class="toc-text">4. 全部依赖：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85nginx"><span class="toc-text">安装nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BD-nginx"><span class="toc-text">1. 下载 nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%A7%A3%E5%8E%8Bnginx"><span class="toc-text">2. 解压nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BC%96%E8%AF%91%E5%B9%B6%E5%AE%89%E8%A3%85"><span class="toc-text">3. 编译并安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%AE%BE%E7%BD%AE-nginx%E8%BF%90%E8%A1%8C%E8%B4%A6%E5%8F%B7%EF%BC%88%E6%9C%AC%E7%AB%A0%E8%8A%82%E6%98%AF%E4%B8%BA%E4%BA%86%E6%8F%90%E9%AB%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E5%8F%AF%E8%B7%B3%E8%BF%87%EF%BC%8C%E4%B8%8D%E5%BD%B1%E5%93%8D%E4%B8%AA%E4%BA%BA%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-text">4. 创建并设置 nginx运行账号（本章节是为了提高服务器的访问权限控制——可跳过，不影响个人使用）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%AE%BE%E7%BD%AE-nginx%E4%B8%BA%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1"><span class="toc-text">5. 设置 nginx为系统服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%90%AF%E5%8A%A8nginx"><span class="toc-text">6. 启动nginx</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx%E7%9A%84config%E6%96%87%E4%BB%B6%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE"><span class="toc-text">nginx的config文件语法高亮</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%BF%9B%E5%85%A5nginx%E7%9A%84%E6%BA%90%E7%A0%81%E6%96%87%E4%BB%B6"><span class="toc-text">1. 进入nginx的源码文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B0%86%E8%AF%A5%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84nginx-vim%E5%A4%8D%E5%88%B6%E5%88%B0-x2F-vim-x2F-syntax-x2F-%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%EF%BC%8C%E5%B9%B6%E4%B8%94%E5%9C%A8-x2F-vim-x2F-filetype-vim%E6%96%87%E4%BB%B6%E4%B8%AD"><span class="toc-text">2. 将该文件夹下的nginx.vim复制到&#x2F;.vim&#x2F;syntax&#x2F;文件夹下，并且在&#x2F;.vim&#x2F;filetype.vim文件中</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%9D%E5%A4%96%E5%86%85%E5%AE%B9"><span class="toc-text">额外内容</span></a></li></ol>
       
     </div>
   </div>
