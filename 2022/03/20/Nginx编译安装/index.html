@@ -16,7 +16,7 @@
       
       |
     
-     Hexo
+     weiqh&#39;Blog
   </title>
 
   
@@ -199,7 +199,13 @@
           
       </div>
       <div class="markdown-body">
-        <h1 id="安装约定"><a href="#安装约定" class="headerlink" title="安装约定:"></a>安装约定:</h1><p>  Nginx的安装目录为:  &#x2F;usr&#x2F;local&#x2F;src&#x2F;nginx<br>  Nginx的安装包目录为: &#x2F;opt&#x2F;</p>
+        <p>本文将介绍如何在 Debian 11 和 CentOS7 下编译安装 Nginx<br>PS: 本文同时适用于 Debian 11、 Debian 10 Buster、Ubuntu 20.04 Focal 以及 Ubuntu 18.04 Bionic*</p>
+<h1 id="安装约定"><a href="#安装约定" class="headerlink" title="安装约定:"></a>安装约定:</h1><ul>
+<li><p>Nginx的安装目录为:  &#x2F;usr&#x2F;local&#x2F;src&#x2F;nginx</p>
+</li>
+<li><p>Nginx的安装包目录为: &#x2F;opt&#x2F;</p>
+</li>
+</ul>
 <h1 id="检查安装环境"><a href="#检查安装环境" class="headerlink" title="检查安装环境"></a>检查安装环境</h1><ul>
 <li><p>我们在安装不同的工具软件的时候，需要安装插件的环境关系</p>
 <p>​		检查系统版本：<code>cat /etc/redhat-release</code></p>
@@ -258,7 +264,7 @@
 <p>   如果出现</p>
 <p>   <img src="https://github.com/weiqh2000/blogImages/blob/main/20220320124604.png?raw=true" alt="20220320124604.png"></p>
 <p>   那么输入</p>
-   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line"></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
 
 <p>   再重新启动 nginx 即可</p>
    <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></table></figure>
