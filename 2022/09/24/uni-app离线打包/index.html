@@ -215,12 +215,12 @@
 <p> <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/14SZ-CjlbaNtGHk3CpamgXQ">百度云</a>，提取码: 7rfu</p>
 </li>
 </ol>
-<h1 id="创建uni-app应用"><a href="#创建uni-app应用" class="headerlink" title="创建uni-app应用"></a>创建uni-app应用</h1><p>​	<a target="_blank" rel="noopener" href="https://dev.dcloud.net.cn/pages/common/login">登录DCloud</a>，进入开发者管理后台。</p>
+<h1 id="创建-uni-app-应用"><a href="#创建-uni-app-应用" class="headerlink" title="创建 uni-app 应用"></a>创建 uni-app 应用</h1><p>​	<a target="_blank" rel="noopener" href="https://dev.dcloud.net.cn/pages/common/login">登录DCloud</a>，进入开发者管理后台。</p>
 <p>​	点击创建应用</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252124241.png" alt="202209252124241"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252124241.png" alt="202209252124241"></p>
 <p>​	创建 uni-app 项目</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252131219.png" alt="202209252131219"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252136594.png" alt="202209252136594"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252131219.png" alt="202209252131219"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252136594.png" alt="202209252136594"></p>
 <p>​	Android 系统要求所有 APK 必须先使用证书进行数字签名，然后才能安装到设备上或进行更新。所以要使得我们的  uni-app 应用，能够离线打包，支持原生插件，那接下来的一步就是生成签名证书。</p>
 <h1 id="关于生成-Android-证书"><a href="#关于生成-Android-证书" class="headerlink" title="关于生成 Android 证书"></a>关于生成 Android 证书</h1><p>目前我们生成证书的途径主要有两种：</p>
 <ul>
@@ -230,8 +230,8 @@
 <p>接下来作者将介绍这两种方式生成 Android 证书。</p>
 <h1 id="使用-keytool-生成-Android-证书"><a href="#使用-keytool-生成-Android-证书" class="headerlink" title="使用 keytool 生成 Android 证书"></a>使用 keytool 生成 Android 证书</h1><p>​	可详见 DCloud 官方书写的<a target="_blank" rel="noopener" href="https://ask.dcloud.net.cn/article/35777">Android平台签名证书(.keystore)生成指南</a></p>
 <h2 id="生成签名证书"><a href="#生成签名证书" class="headerlink" title="生成签名证书"></a>生成签名证书</h2><p>​	打开命令行（cmd）</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209251238716.png" alt="202209251238716"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209251950291.png" alt="202209251950291"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209251238716.png" alt="202209251238716"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209251950291.png" alt="202209251950291"></p>
 <p>​	输入以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkey -<span class="built_in">alias</span> testalias -keyalg RSA -keysize 2048 -validity 36500 -keystore test.keystore</span><br></pre></td></tr></table></figure>
 
@@ -244,12 +244,12 @@
 </li>
 </ul>
 <p>回车后会提示：</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209251954227.png" alt="202209251954227"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209251954227.png" alt="202209251954227"></p>
 <h2 id="查看证书信息"><a href="#查看证书信息" class="headerlink" title="查看证书信息"></a>查看证书信息</h2><p>可以使用以下命令查看证书信息：</p>
 <figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -v -keystore test.keystore  </span><br><span class="line">Enter keystore password: //输入密码，回车</span><br></pre></td></tr></table></figure>
 
 <p>会输出以下格式信息：</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252054748.png" alt="202209252054748"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252054748.png" alt="202209252054748"></p>
 <p>其中证书指纹信息（Certificate fingerprints ）：</p>
 <ul>
 <li>MD5<br>证书的 MD5 指纹信息（安全码MD5）</li>
@@ -259,54 +259,54 @@
 <p>生成的证书将会出现在该路径下：</p>
 <figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\User\&lt;用户名&gt;\</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252022257.png" alt="202209252022257"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252022257.png" alt="202209252022257"></p>
 <h1 id="使用-DCloud-官方提供的自动生成证书的功能，生成-Android-证书"><a href="#使用-DCloud-官方提供的自动生成证书的功能，生成-Android-证书" class="headerlink" title="使用 DCloud 官方提供的自动生成证书的功能，生成 Android 证书"></a>使用 DCloud 官方提供的自动生成证书的功能，生成 Android 证书</h1><p>回到 DCloud 的开发者后台</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252158397.png" alt="202209252158397"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252159497.png" alt="202209252159497"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252200583.png" alt="202209252200583"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252200416.png" alt="202209252200416"></p>
-<h2 id="查看证书详情"><a href="#查看证书详情" class="headerlink" title="查看证书详情"></a>查看证书详情</h2><p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252204781.png" alt="202209252204781"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252203804.png" alt="202209252203804"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252158397.png" alt="202209252158397"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252159497.png" alt="202209252159497"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252200583.png" alt="202209252200583"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252200416.png" alt="202209252200416"></p>
+<h2 id="查看证书详情"><a href="#查看证书详情" class="headerlink" title="查看证书详情"></a>查看证书详情</h2><p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252204781.png" alt="202209252204781"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252203804.png" alt="202209252203804"></p>
 <h1 id="Android-Studio-导入官方的-5-SDK"><a href="#Android-Studio-导入官方的-5-SDK" class="headerlink" title="Android Studio 导入官方的 5+SDK"></a>Android Studio 导入官方的 5+SDK</h1><p>​	我们已经完成了签名证书的生成。接下来，我们要通过修改 uni-app 官方提供的 5+SDK 成为我们自己的 Android 项目。(PS: 5+SDK 的链接见本文开头的 “<a href="#anchor">开发环境情况与所需文件</a>” 列表)</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252220939.png" alt="202209252220939"></p>
-<h2 id="使用-Android-Studio-打开该项目"><a href="#使用-Android-Studio-打开该项目" class="headerlink" title="使用 Android Studio 打开该项目"></a>使用 Android Studio 打开该项目</h2><p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252231912.png" alt="202209252231912"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252234093.png" alt="202209252234093"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252235281.png" alt="202209252235281"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252240468.png" alt="202209252240468"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252220939.png" alt="202209252220939"></p>
+<h2 id="使用-Android-Studio-打开该项目"><a href="#使用-Android-Studio-打开该项目" class="headerlink" title="使用 Android Studio 打开该项目"></a>使用 Android Studio 打开该项目</h2><p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252231912.png" alt="202209252231912"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252234093.png" alt="202209252234093"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252235281.png" alt="202209252235281"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252240468.png" alt="202209252240468"></p>
 <p>新建类包，实现自定义包名</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252311414.png" alt="202209252311414"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252312827.png" alt="202209252312827"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252311414.png" alt="202209252311414"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252312827.png" alt="202209252312827"></p>
 <p>在 DCloud 开发者后台，输入包名，以及签名证书的 SHA1 ，并保存。</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252314809.png" alt="202209252314809"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252314809.png" alt="202209252314809"></p>
 <p>保存成功后，该应用的 App Key 将会显示。</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252315188.png" alt="202209252315188"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252315188.png" alt="202209252315188"></p>
 <p>将其复制粘贴到 </p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252320128.png" alt="202209252320128"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252320128.png" alt="202209252320128"></p>
 <h1 id="uni-app-部分"><a href="#uni-app-部分" class="headerlink" title="uni-app 部分"></a>uni-app 部分</h1><p>​	我们已经完成了 Android Studio 导入并修改官方 5+SDK 的操作。接下来，我们将会使用 HBuilderX 构建一个 uni-app 应用，并完成 uni-app 方面的打包。</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252243774.png" alt="202209252243774"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252248102.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252243774.png" alt="202209252243774"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252248102.png"></p>
 <p>将该项目的 appid 修改为 DCloud 开发者后台对应应用的 appid。(PS: 如果你在后台新建了应用，那一般都是会自动对应的。如果没有对应，就只能手动修改了。)</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252250229.png" alt="202209252250229"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252250229.png" alt="202209252250229"></p>
 <p>将 uni-app 应用打包为 Android 资源包</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252256892.png" alt="202209252256892"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252259348.png" alt="202209252259348"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252256892.png" alt="202209252256892"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252259348.png" alt="202209252259348"></p>
 <p>将打包出来的资源包，拷贝出来</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209260843466.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209260843466.png"></p>
 <h1 id="整合-uni-app-与-Android-代码，完成打包"><a href="#整合-uni-app-与-Android-代码，完成打包" class="headerlink" title="整合 uni-app 与 Android 代码，完成打包"></a>整合 uni-app 与 Android 代码，完成打包</h1><p>打开 dcloud_control.xml 文件修改 appid 与 appvar (应用版本号)</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252323221.png" alt="202209252323221"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252323221.png" alt="202209252323221"></p>
 <p>将我们上文中得到的资源包，覆盖 “__UNI__E”，这个文件。</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252326248.png" alt="202209252326248"></p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252327979.png" alt="202209252327979"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252326248.png" alt="202209252326248"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252327979.png" alt="202209252327979"></p>
 <p>将我们之前生成好的证书放入项目，并配置对应参数。</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252333758.png" alt="202209252333758"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252333758.png" alt="202209252333758"></p>
 <p>将主的AndroidManifest.xml 文件头的 package 修改为我们在 DCloud 开发者后台设置的包名</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252347155.png" alt="202209252347155"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252347155.png" alt="202209252347155"></p>
 <p>将项目的主 build.gradle 文件的 applicationId 修改为我们在 DCloud 开发者后台设置的包名</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209252347295.png" alt="202209252347295"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209252347295.png" alt="202209252347295"></p>
 <h1 id="运行代码"><a href="#运行代码" class="headerlink" title="运行代码"></a>运行代码</h1><p>连接上安卓设备，右上角点击绿色三角形，运行代码。</p>
-<p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209260901893.png" alt="202209260901893"></p>
-<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209260901452.jpg" alt="202209260901452"></p>
-<h2 id="关于未配置appkey或配置错误的问题"><a href="#关于未配置appkey或配置错误的问题" class="headerlink" title="关于未配置appkey或配置错误的问题"></a>关于未配置appkey或配置错误的问题</h2><p><img src="https://raw.githubusercontent.com/weiqhcode/blogImages/main/202209260902419.jpg" alt="202209260902419"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209260901893.png" alt="202209260901893"></p>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209260901452.jpg" alt="202209260901452"></p>
+<h2 id="关于未配置appkey或配置错误的问题"><a href="#关于未配置appkey或配置错误的问题" class="headerlink" title="关于未配置appkey或配置错误的问题"></a>关于未配置appkey或配置错误的问题</h2><p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/202209260902419.jpg" alt="202209260902419"></p>
 <p>请仔细检查：</p>
 <ul>
 <li>uni-app 部分的代码， manifwst.json (文件)-&gt; 源码视图 -&gt; appid (键值对) ， appid 是否修改</li>
@@ -372,7 +372,7 @@
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAuni-app%E5%BA%94%E7%94%A8"><span class="toc-text">创建uni-app应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%94%9F%E6%88%90-Android-%E8%AF%81%E4%B9%A6"><span class="toc-text">关于生成 Android 证书</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-keytool-%E7%94%9F%E6%88%90-Android-%E8%AF%81%E4%B9%A6"><span class="toc-text">使用 keytool 生成 Android 证书</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6"><span class="toc-text">生成签名证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%AF%81%E4%B9%A6%E4%BF%A1%E6%81%AF"><span class="toc-text">查看证书信息</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-DCloud-%E5%AE%98%E6%96%B9%E6%8F%90%E4%BE%9B%E7%9A%84%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6%E7%9A%84%E5%8A%9F%E8%83%BD%EF%BC%8C%E7%94%9F%E6%88%90-Android-%E8%AF%81%E4%B9%A6"><span class="toc-text">使用 DCloud 官方提供的自动生成证书的功能，生成 Android 证书</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%AF%81%E4%B9%A6%E8%AF%A6%E6%83%85"><span class="toc-text">查看证书详情</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-Studio-%E5%AF%BC%E5%85%A5%E5%AE%98%E6%96%B9%E7%9A%84-5-SDK"><span class="toc-text">Android Studio 导入官方的 5+SDK</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Android-Studio-%E6%89%93%E5%BC%80%E8%AF%A5%E9%A1%B9%E7%9B%AE"><span class="toc-text">使用 Android Studio 打开该项目</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app-%E9%83%A8%E5%88%86"><span class="toc-text">uni-app 部分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B4%E5%90%88-uni-app-%E4%B8%8E-Android-%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%AE%8C%E6%88%90%E6%89%93%E5%8C%85"><span class="toc-text">整合 uni-app 与 Android 代码，完成打包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="toc-text">运行代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%88%90"><span class="toc-text">完成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%AA%E9%85%8D%E7%BD%AEappkey%E6%88%96%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">关于未配置appkey或配置错误的问题</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-uni-app-%E5%BA%94%E7%94%A8"><span class="toc-text">创建 uni-app 应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%94%9F%E6%88%90-Android-%E8%AF%81%E4%B9%A6"><span class="toc-text">关于生成 Android 证书</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-keytool-%E7%94%9F%E6%88%90-Android-%E8%AF%81%E4%B9%A6"><span class="toc-text">使用 keytool 生成 Android 证书</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6"><span class="toc-text">生成签名证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%AF%81%E4%B9%A6%E4%BF%A1%E6%81%AF"><span class="toc-text">查看证书信息</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-DCloud-%E5%AE%98%E6%96%B9%E6%8F%90%E4%BE%9B%E7%9A%84%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6%E7%9A%84%E5%8A%9F%E8%83%BD%EF%BC%8C%E7%94%9F%E6%88%90-Android-%E8%AF%81%E4%B9%A6"><span class="toc-text">使用 DCloud 官方提供的自动生成证书的功能，生成 Android 证书</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%AF%81%E4%B9%A6%E8%AF%A6%E6%83%85"><span class="toc-text">查看证书详情</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-Studio-%E5%AF%BC%E5%85%A5%E5%AE%98%E6%96%B9%E7%9A%84-5-SDK"><span class="toc-text">Android Studio 导入官方的 5+SDK</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Android-Studio-%E6%89%93%E5%BC%80%E8%AF%A5%E9%A1%B9%E7%9B%AE"><span class="toc-text">使用 Android Studio 打开该项目</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#uni-app-%E9%83%A8%E5%88%86"><span class="toc-text">uni-app 部分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B4%E5%90%88-uni-app-%E4%B8%8E-Android-%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%AE%8C%E6%88%90%E6%89%93%E5%8C%85"><span class="toc-text">整合 uni-app 与 Android 代码，完成打包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="toc-text">运行代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%88%90"><span class="toc-text">完成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%AA%E9%85%8D%E7%BD%AEappkey%E6%88%96%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">关于未配置appkey或配置错误的问题</span></a></li></ol></li></ol>
       
     </div>
   </div>

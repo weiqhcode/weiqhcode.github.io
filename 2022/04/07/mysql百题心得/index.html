@@ -199,11 +199,11 @@
 ### 一、 ORDER BY 返回的是游标而不是集合
 
 <p>SQL 的理论其实是集合论，常见的类似求数据的交集、并集、差集都可以使用集合的思维来求解。集合中的行之间没有预先定义的顺序，它只是成员的一种逻辑组合，成员之间的顺序无关紧要。如下图，每一个括号里的内容就是一条记录，在没排序前，他们都是随机分布在集合中。<br>Student(ID,Name,Age)</p>
-<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407110418.png?raw=true" alt="20220407110418.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407110418.png?raw=true" alt="20220407110418.png"></p>
 <center>Student集合</center>
 
 <p>但是对于带有排序作用的 ORDER BY 子句的查询，它返回的是一个对象，其中的行按特定的顺序组织在一起，我们把这种对象称为游标。<br>如下图，经过对 Student 表的 ID 进行 ORDER BY 排序后， Student 表变成了有序对象，也就是我们上面说的游标。<br>Student(ID,Name,Age)</p>
-<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111256.png?raw=true" alt="20220407111256.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407111256.png?raw=true" alt="20220407111256.png"></p>
 <center>Student对象</center>
 
 
@@ -216,20 +216,20 @@
 
 <p>从上面可以看到 SELECT 在 HAVING 后才开始执行，这个时候 SELECT 后面列的别名只对后续的步骤生效，而对 SELECT 前面的步骤是无效的。所以如果你在 WHERE ， GROUP BY ，或 HAVING 后面使用列的别名均会报错。<br>我们举例测试一下。</p>
 <p>示例表 Customers 结构及数据如下：</p>
-<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111352.png?raw=true" alt="20220407111352.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407111352.png?raw=true" alt="20220407111352.png"></p>
 <h4 id="1、-WHERE-后面不使用别名的情况"><a href="#1、-WHERE-后面不使用别名的情况" class="headerlink" title="1、 WHERE 后面不使用别名的情况"></a>1、 WHERE 后面不使用别名的情况</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">WHERE</span> 城市<span class="operator">=</span><span class="string">&#x27;广州&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>结果如下：</p>
-<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111448.png?raw=true" alt="20220407111448.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407111448.png?raw=true" alt="20220407111448.png"></p>
 <h4 id="2、-WHERE-后面使用列别名的情况"><a href="#2、-WHERE-后面使用列别名的情况" class="headerlink" title="2、 WHERE 后面使用列别名的情况"></a>2、 WHERE 后面使用列别名的情况</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">WHERE</span> City<span class="operator">=</span><span class="string">&#x27;广州&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>执行结果如下：</p>
-<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111512.png?raw=true" alt="20220407111512.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407111512.png?raw=true" alt="20220407111512.png"></p>
 <p>从返回的消息中我们可以看到，重命名后的 City 并不能被 WHERE 识别，所以才会报“列名’ City ‘无效”的提示。<br>其他关键字大家也可以使用上述方法进行测试，下面我们测试 GROUP BY 和 HAVING 后面使用列别名的情况。</p>
 <h4 id="3、测试-GROUP-BY-后使用列别名"><a href="#3、测试-GROUP-BY-后使用列别名" class="headerlink" title="3、测试 GROUP BY 后使用列别名"></a>3、测试 GROUP BY 后使用列别名</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> City</span><br></pre></td></tr></table></figure>
 
 <p>结果如下：</p>
-<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111540.png?raw=true" alt="20220407111540.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407111540.png?raw=true" alt="20220407111540.png"></p>
 <h4 id="4、测试-HAVING-后使用列别名"><a href="#4、测试-HAVING-后使用列别名" class="headerlink" title="4、测试 HAVING 后使用列别名"></a>4、测试 HAVING 后使用列别名</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> 城市 </span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(City) <span class="operator">&gt;</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 
@@ -238,28 +238,28 @@
 
 
 <p>结果如下：</p>
-<p> <img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111622.png?raw=true" alt="20220407111622.png"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407111622.png?raw=true" alt="20220407111622.png"></p>
 <p>从上面的几个测试示例的结果中，可以得出我们的结论是正确的： ORDER BY 子句是唯一能重用列别名的一步。</p>
 <h3 id="三、谨慎使用-ORDER-BY-后面接数字的方式来进行排序"><a href="#三、谨慎使用-ORDER-BY-后面接数字的方式来进行排序" class="headerlink" title="三、谨慎使用 ORDER BY 后面接数字的方式来进行排序"></a>三、谨慎使用 ORDER BY 后面接数字的方式来进行排序</h3><p>有些小伙伴为了图省事，喜欢在 ORDER BY 后面写数字，具体示例如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
 
 <p>结果如下：</p>
-<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111701.png?raw=true" alt="20220407111701.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407111701.png?raw=true" alt="20220407111701.png"></p>
 <p>这样写的结果，针对当前的查询是正确没有问题的， ORDER BY 后面的数字1,2,3分别代表 SELECT 后面的第1，第2，第3个字段(也就是 Name， Address ， City)。<br>可是当查询的列发生改变，忘了修改 ORDER BY 列表。特别是当查询语句很长时，要找到 ORDER BY 与 SELECT 列表中的哪个列相对应会非常困难。<br>例如：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">客户ID <span class="keyword">AS</span> ID, </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
 
 <p>由于增加了一列“客户 ID ”，原本的题意还是对 Name ， Address ， City 排序，但是因为使用了 ORDER BY 加数字，排序后的结果如下：</p>
-<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111731.png?raw=true" alt="20220407111731.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407111731.png?raw=true" alt="20220407111731.png"></p>
 <p>得到的结果并不是我们想要的，所以请慎用 ORDER BY 加数字，尽量使用 ORDER BY 加列名或列别名。</p>
 <h3 id="四、表达式不能使用-ORDER-BY-排序"><a href="#四、表达式不能使用-ORDER-BY-排序" class="headerlink" title="四、表达式不能使用 ORDER BY 排序"></a>四、表达式不能使用 ORDER BY 排序</h3><p>表表达式包括视图，内联表值函数，派生表(子查询)和公用表表达式( CTE )。<br>例如下面的视图是无效的</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> V_Customers <span class="keyword">AS</span> </span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">客户ID <span class="keyword">AS</span> ID, </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> ID,Name,Address</span><br></pre></td></tr></table></figure>
 
 
 <p>结果如下：</p>
-<p> <img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111756.png?raw=true" alt="20220407111756.png"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407111756.png?raw=true" alt="20220407111756.png"></p>
 <p>这个错误是不是很熟悉？因为很多小伙伴经常喜欢在视图或子查询里面加 ORDER BY ，然后一执行就会报这个错。<br>根本原因不敢妄加断定，因为搜寻了很多文献资料也没给出一个具体的说法。<br>这里猜测是因为视图，内联表值函数，派生表(子查询)和公用表表达式( CTE )等返回的结果还需要进一步的去使用，加了 ORDER BY 进行排序是多此一举，反而会浪费系统资源。所以数据库的开发者不希望大家使用这样不规范操作。<br>所以下次就不要在表表达式里添加 ORDER BY 了。</p>
 <h3 id="五、-T-SQL-中表表达式加了-TOP-可以使用-ORDER-BY"><a href="#五、-T-SQL-中表表达式加了-TOP-可以使用-ORDER-BY" class="headerlink" title="五、 T-SQL 中表表达式加了 TOP 可以使用 ORDER BY"></a>五、 T-SQL 中表表达式加了 TOP 可以使用 ORDER BY</h3><p>我们从第四点的报错信息中可以看到：在另外还指定了 TOP 、 OFFSET  或 FOR XML 是可以使用 ORDER BY 的。</p>
-<p><img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111819.png?raw=true" alt="20220407111819.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407111819.png?raw=true" alt="20220407111819.png"></p>
 <p>这又是为什么呢？<br>我们还是先举个栗子给大家看一下</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">客户ID <span class="keyword">AS</span> ID, </span><br><span class="line">姓名 <span class="keyword">AS</span> Name, </span><br><span class="line">地址 <span class="keyword">AS</span> Address, </span><br><span class="line">城市 <span class="keyword">AS</span> City </span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">(<span class="keyword">SELECT</span> TOP <span class="number">3</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> 城市) Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> ID,Name,Address</span><br></pre></td></tr></table></figure>
 
@@ -267,7 +267,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">3</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> Customers </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> 城市 </span><br></pre></td></tr></table></figure>
 
 <p>结果如下：</p>
-<p> <img src="https://github.com/weiqh2000/blogImages/blob/main/20220407111904.png?raw=true" alt="20220407111904.png"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/weiqhcode/blogImages/20220407111904.png?raw=true" alt="20220407111904.png"></p>
 <p>而不保证结果集的排列顺序，因为表表达式外面至少还有一层才是我们最终需要的结果集。<br>这里的 ORDER BY 只对当前的子查询生效，到了主查询是不起作用的。必须在主查询末尾继续添加一个 ORDER BY 子句才能对结果集生效，就像我们例子中写的那样。<br>除非逻辑要求，一般情况下并不推荐大家这样巧妙的避开子查询中不能使用 ORDER BY 的限制。</p>
 <p><a target="_blank" rel="noopener" href="https://database.51cto.com/art/201912/608333.htm">https://database.51cto.com/art/201912/608333.htm</a></p>
 <h2 id="SQL-常用关键字"><a href="#SQL-常用关键字" class="headerlink" title="SQL 常用关键字"></a>SQL 常用关键字</h2><h3 id="select"><a href="#select" class="headerlink" title="	select * :"></a>	select * :</h3><p>​	返回所有记录</p>
