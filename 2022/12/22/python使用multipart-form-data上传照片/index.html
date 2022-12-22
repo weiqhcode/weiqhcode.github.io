@@ -8,10 +8,13 @@
   <meta name="author" content="John Doe" />
   <meta name="description" content="" />
   
-    <meta name="robots" content="noindex" />
-  
   
   <title>
+    
+      python使用 multipart/form-data 上传照片 
+      
+      
+      |
     
      weiqh&#39;Blog
   </title>
@@ -108,71 +111,192 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="docker从安装到使用的常用命令">
-        <div class="time-m-d">2022-03-21</div>
-        <div class="title">
-          <a href="/2022/03/21/docker%E4%BB%8E%E5%AE%89%E8%A3%85%E5%88%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-            
-              
-                <span>docker从安装到使用的常用命令</span>
-              
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">python使用 multipart/form-data 上传照片</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2022-12-22 10:27:23
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/python/" title="python">
+                    <b>#</b> python
+                  </a>
+                </span>
+                
+              </span>
+          
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/python/" title="python">
+                    #python
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="Nginx编译安装">
-        <div class="time-m-d">2022-03-20</div>
-        <div class="title">
-          <a href="/2022/03/20/Nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/">
-            
-              
-                <span>Nginx编译安装</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>​	今天想使用 python 上传图片到自己的兰空图床上，发现图床只能使用 multipart&#x2F;form-data 请求上传，也了解了 multipart&#x2F;form-data 请求的原理。文末会贴出大佬解析原理的链接。</p>
+<h2 id="python-代码部分"><a href="#python-代码部分" class="headerlink" title="python 代码部分"></a>python 代码部分</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> requests_toolbelt.multipart.encoder <span class="keyword">import</span> MultipartEncoder</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;https://XXX.XXXX.XXXX/api/v1/upload&quot;</span></span><br><span class="line"></span><br><span class="line">fl = <span class="built_in">open</span>(<span class="string">r&quot;XXXXXXX.png&quot;</span>, <span class="string">&quot;rb&quot;</span>)</span><br><span class="line">multipart_encoder = MultipartEncoder(</span><br><span class="line">    fields=&#123;</span><br><span class="line">        <span class="string">&quot;file&quot;</span>: (<span class="string">&quot;XXXXXXX.png&quot;</span>, fl, <span class="string">&quot;image/png&quot;</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment"># boundary 该参数作为请求信息中的分割符号，没用具体含义</span></span><br><span class="line">    boundary=<span class="string">&quot;----WebKitFormBoundary&quot;</span> + <span class="string">&quot;&quot;</span>.join(random.sample(<span class="string">&quot;0123456789abcdef&quot;</span>, <span class="number">16</span>))</span><br><span class="line">)</span><br><span class="line">header = &#123;</span><br><span class="line">    <span class="string">&quot;Authorization&quot;</span>: <span class="string">&quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: multipart_encoder.content_type</span><br><span class="line">&#125;</span><br><span class="line">res = requests.post(url, data=multipart_encoder, headers=header)</span><br><span class="line"><span class="built_in">print</span>(res.request.body)</span><br><span class="line"><span class="built_in">print</span>(res.json())</span><br></pre></td></tr></table></figure>
+
+<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><p>​	理解 HTTP 协议中的 multipart&#x2F;form-data ：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/459122038">https://zhuanlan.zhihu.com/p/459122038</a></p>
+<p>​	python multipart&#x2F;form-data 上传图片：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/816f312623ae">https://www.jianshu.com/p/816f312623ae</a></p>
+
       </div>
-    
-      <div class="post-item" title="vps一键DD">
-        <div class="time-m-d">2022-03-19</div>
-        <div class="title">
-          <a href="/2022/03/19/vps%E4%B8%80%E9%94%AEdd%E8%84%9A%E6%9C%AC/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>vps一键DD</span>
-              
+              <a href="/2022/12/20/%E5%B8%B8%E7%94%A8-linux-%E5%91%BD%E4%BB%A4/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2022-12-22 10:27:23
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/python/" title="python">
+                        <b>#</b> python
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/python/" title="python">
+                        #python
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="myTest">
-        <div class="time-m-d">2021-12-11</div>
-        <div class="title">
-          <a href="/2021/12/11/myTest/">
-            
-              
-                <span>myTest</span>
-              
-            
-          </a>
-        </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python-%E4%BB%A3%E7%A0%81%E9%83%A8%E5%88%86"><span class="toc-text">python 代码部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="toc-text">相关资料</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+  
+    <script async type="text/javascript" src="/plugins/valine.min.js" onload="loadValineSuc(this)"></script>
+  
+
+  <div id="vcomments"></div>
+
+  <script>
+    function loadValineSuc() {
+      new Valine({
+        el: '#vcomments',
+        appId: 'lCrMikJEqOIZTcXMeIBues6Q-gzGzoHsz',
+        appKey: '0FShVARCGqZ3Vi0gLZACQhLc',
+        placeholder: 'Welcome!',
+        avatar: 'retro',
+        lang: 'en'
+      })
+    }
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-      <a href="/"><i class="iconfont icon-angleleft"></i></a>
-    
-    <span class="page-num">2 / 2</span>
-    
-  </nav>
-</div>
+
 
         
 <div class="footer">
@@ -440,6 +564,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + python%E4%BD%BF%E7%94%A8%20multipart%2Fform-data%20%E4%B8%8A%E4%BC%A0%E7%85%A7%E7%89%87 + '&url=' + http%3A%2F%2Fexample.com%2F2022%2F12%2F22%2Fpython%25E4%25BD%25BF%25E7%2594%25A8multipart-form-data%25E4%25B8%258A%25E4%25BC%25A0%25E7%2585%25A7%25E7%2589%2587%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2022/12/22/python%E4%BD%BF%E7%94%A8multipart-form-data%E4%B8%8A%E4%BC%A0%E7%85%A7%E7%89%87/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
