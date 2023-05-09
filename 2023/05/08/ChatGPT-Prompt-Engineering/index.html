@@ -11,8 +11,8 @@
   
   <title>
     
-      Tag 
-       : Docker
+      ChatGPT-Prompt-Engineering 
+      
       
       |
     
@@ -111,48 +111,131 @@
 
 
       <div class="flex-container">
-        <!-- 标签详情页，展示某个标签下的文章列表，url形式：https://yoursite/tags/某个标签/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<div class="container tag-details">
-  <div class="content-title">
-    <h2>
-      <span>Docker</span>
-    </h2>
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">ChatGPT-Prompt-Engineering</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-08 22:44:55
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/12/22/python-%E4%BD%BF%E7%94%A8-multipart-form-data-%E4%B8%8A%E4%BC%A0%E7%85%A7%E7%89%87/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-08 22:44:55
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2023/05/09/pandora-docker-compose/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+  
+    <script async type="text/javascript" src="/plugins/valine.min.js" onload="loadValineSuc(this)"></script>
+  
+
+  <div id="vcomments"></div>
+
+  <script>
+    function loadValineSuc() {
+      new Valine({
+        el: '#vcomments',
+        appId: 'lCrMikJEqOIZTcXMeIBues6Q-gzGzoHsz',
+        appKey: '0FShVARCGqZ3Vi0gLZACQhLc',
+        placeholder: 'Welcome!',
+        avatar: 'retro',
+        lang: 'en'
+      })
+    }
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
   </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="pandora-docker-compose">
-        <span class="time-m-d">2023-05-09</span>
-        <a href="/2023/05/09/pandora-docker-compose/">
-          <span>pandora-docker-compose</span>
-        </a>
-      </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="使用 docker 运行 python 应用">
-        <span class="time-m-d">2022-09-12</span>
-        <a href="/2022/09/12/%E4%BD%BF%E7%94%A8-docker-%E8%BF%90%E8%A1%8C-python-%E5%BA%94%E7%94%A8/">
-          <span>使用 docker 运行 python 应用</span>
-        </a>
-      </div>
-    </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="docker 从安装到使用的常用命令">
-        <span class="time-m-d">2022-03-21</span>
-        <a href="/2022/03/21/docker-%E4%BB%8E%E5%AE%89%E8%A3%85%E5%88%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-          <span>docker 从安装到使用的常用命令</span>
-        </a>
-      </div>
-    </div>
-  
-  <nav class="post-navigation">
-    
-    <span class="page-num">1 / 1</span>
-    
-  </nav>
-</div>
+
 
         
 <div class="footer">
@@ -420,6 +503,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + ChatGPT-Prompt-Engineering + '&url=' + http%3A%2F%2Fexample.com%2F2023%2F05%2F08%2FChatGPT-Prompt-Engineering%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2023/05/08/ChatGPT-Prompt-Engineering/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
