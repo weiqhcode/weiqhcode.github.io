@@ -1,3 +1,4 @@
+https://blog.weiqh.net/2023/09/11/nginx-auth-basic/
 https://blog.weiqh.net/2022/03/20/Nginx-%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/
 https://blog.weiqh.net/2022/04/07/mysql-%E7%99%BE%E9%A2%98%E5%BF%83%E5%BE%97/
 https://blog.weiqh.net/2022/09/24/uni-app-%E7%A6%BB%E7%BA%BF%E6%89%93%E5%8C%85/
