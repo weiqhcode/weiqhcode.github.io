@@ -159,7 +159,7 @@
     
     <div class="footer-more">
       
-        <a target="_blank" rel="noopener" href="https://github.com/weiqhcode">Copyright © 2023 weiqh</a>
+        <a target="_blank" rel="noopener" href="https://github.com/weiqhcode">Copyright © 2024 weiqh</a>
         
     </div>
   
@@ -177,6 +177,23 @@
         
     </div>
   
+  
+  <script>
+    const targetDivs = document.querySelectorAll('.footer-more');
+
+
+if (targetDivs.length >= 3) {
+  // 创建一个临时的div来存储你的HTML
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = `<div class="footer-more">
+    <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral">本网站由 <img src="https://gcore.jsdelivr.net/gh/YukiNoUta/cdn-static@main/blog/svg/upyun.svg" class="lazyload loaded" srcset="https://gcore.jsdelivr.net/gh/YukiNoUta/cdn-static@main/blog/svg/upyun.svg" width="53" height="14" style="fill:currentColor;vertical-align:middle" data-ll-status="loaded"> 提供 CDN 加速/云存储服务</a>
+  </div>`;
+
+  // 插入到第三个div之后
+  const thirdDiv = targetDivs[1];
+  thirdDiv.parentNode.insertBefore(tempDiv.firstChild, thirdDiv.nextSibling);
+}
+  </script>
   
 </div>
 
